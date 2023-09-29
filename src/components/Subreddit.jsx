@@ -1,38 +1,70 @@
-// import React from 'react';
-// import { useOutletContext, useParams } from 'react-router-dom';
-// import CreatePost from './CreatePost';
-// import { API } from '../lib';
+import React, { useState } from 'react';
+import { API } from '../lib';
+import Button from './Button';
+import { useOutletContext, useNavigate } from 'react-router-dom';
+import Comments from './Comments';
 
-// const Subreddit = () => {
-//   // Get context values
-//   const { posts, subreddits } = useOutletContext();
+const Subreddit = () => {
+  const navigate = useNavigate();
+  const { token, fetchSubreddits } = useOutletContext();
+  const [name, setName] = useState('');
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-//   // Get the subredditName from URL parameters
-//   const { subredditName } = useParams();
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setError('');
+    setSuccessMessage('');
 
-//   // Find the subreddit based on the subredditName
-//   const subreddit = subreddits.find((sub) => sub.name === subredditName);
+    const res = await fetch(`${API}/subreddits`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+      }),
+    });
 
-//   // Filter posts belonging to the subreddit (if subreddit exists)
-//   const filteredPosts = subreddit
-//     ? posts.filter((post) => post.subredditId === subreddit.id)
-//     : [];
+    const info = await res.json();
 
-//   return (
-//     <div>
-//       {/* Render the CreatePost component */}
-//       <CreatePost />
+    if (!info.success) {
+      setError(info.error);
+      setSuccessMessage('');
+    } else {
+      setName(''); // Clear input field
+      fetchSubreddits();
+      setSuccessMessage('Subreddit created successfully.');
+    }
+  }
 
-//       {/* Render the filtered posts */}
-//       {filteredPosts.map((post) => (
-//         <div key={post.id}>
-//           {/* Display post content, e.g.*/}
-//           <h2>{post.title}</h2>
-//           <p>{post.text}</p>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
+  return (
+    <div className="container mx-auto p-4 bg-gray-200 mt-5 ml-80">
+      <form
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        style={{ width: '60%' }}
+        onSubmit={handleSubmit}
+      >
+        <div className="mb-4 mt-4">
+          <input
+            className="border rounded w-full py-2 px-3"
+            type="text"
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder="Subreddit Name"
+          />
+        </div>
 
-// export default Subreddit;
+        <div className="mb-6 flex justify-end">
+          <Button />
+        </div>
+        {error && <p className="text-red-500">{error}</p>}
+        {successMessage && <p className="text-green-500">{successMessage}</p>}
+      </form>
+      <Comments />
+    </div>
+  );
+};
+
+export default Subreddit;

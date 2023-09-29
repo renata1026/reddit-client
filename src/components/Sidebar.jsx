@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
-  FaAngleDown,
-  FaChevronUp,
   FaChevronDown,
-  FaChevronRight,
   FaHome,
   FaFire,
-  FaGamepad,
-  FaDollarSign,
-  FaBitcoin,
-  FaTv,
-  FaStar,
+  FaTags,
   FaBuilding,
   FaBullhorn,
   FaQuestionCircle,
-  FaUserFriends,
-  FaList,
   FaBriefcase,
   FaNewspaper,
 } from 'react-icons/fa';
@@ -33,15 +25,6 @@ const Sidebar = ({ subreddits }) => {
         className="fixed inset-y-0 left-0 w-64 bg-white text-rgb-15-26-28 opacity-70 border-r border-gray-300 mt-16 transition-transform ease-in-out duration-300 transform font-reddit-sans"
         style={{ zIndex: 9 }}
       >
-        <div className="subreddits-container flex flex-col items-center">
-          {subreddits.map((subreddit) => {
-            return (
-              <div className="subreddit mb-2" key={subreddit.id}>
-                <h2>{subreddit.name}</h2>
-              </div>
-            );
-          })}
-        </div>
         <nav>
           <ul className="space-y-2 mt-10">
             <li className="px-4 py-2 flex items-center text-base">
@@ -66,32 +49,17 @@ const Sidebar = ({ subreddits }) => {
 
             {isOpen && (
               <>
-                <li className="px-4 py-2 flex items-center text-base">
-                  <FaGamepad className="mr-2" />
-                  Gaming <FaChevronDown className="ml-auto" />
-                </li>
-                <li className="px-4 py-2 flex items-center text-base">
-                  <FaGamepad className="mr-2" />
-                  Sports <FaChevronDown className="ml-auto" />
-                </li>
-                <li className="px-4 py-2 flex items-center text-base">
-                  <FaDollarSign className="mr-2" />
-                  Business <FaChevronDown className="ml-auto" />
-                </li>
-                <li className="px-4 py-2 flex items-center text-base">
-                  <FaBitcoin className="mr-2" />
-                  Crypto
-                  <FaChevronDown className="ml-auto" />
-                </li>
-                <li className="px-4 py-2 flex items-center text-base">
-                  <FaTv className="mr-2" />
-                  Television
-                  <FaChevronDown className="ml-auto" />
-                </li>
-                <li className="px-4 py-2 flex items-center text-base">
-                  <FaStar className="mr-2" />
-                  Celebrity <FaChevronDown className="ml-auto" />
-                </li>
+                {subreddits.map((subreddit) => (
+                  <li
+                    className="subreddit px-4 py-2 flex items-center text-base"
+                    key={subreddit.id}
+                  >
+                    <Link to={`subreddit/${subreddit.id}`}>
+                      <FaTags className="mr-2" />
+                      {subreddit.name}
+                    </Link>
+                  </li>
+                ))}
               </>
             )}
             <li

@@ -4,13 +4,14 @@ import { useState } from 'react';
 import { API } from '../lib';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Subreddit from './Subreddit';
 
-const DeletePost = () => {
+const DeleteRedditPost = () => {
   const { postId } = useParams();
 
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isDeletingReddit, setIsDeletingReddit] = useState(false);
   const [error, setError] = useState('');
-  const { token, fetchPosts } = useOutletContext();
+  const { token, fetchSubreddits, subreddits } = useOutletContext();
 
   const navigate = useNavigate();
 
@@ -27,7 +28,7 @@ const DeletePost = () => {
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        handleDeletePost();
+        handleDeleteRedditPost();
       } else {
         // Redirect or handle cancel action here
         navigate('/');
@@ -35,11 +36,11 @@ const DeletePost = () => {
     });
   }, []);
 
-  const handleDeletePost = async () => {
-    setIsDeleting(true);
+  const handleDeleteRedditPost = async () => {
+    setIsDeletingReddit(true);
     setError('');
 
-    const res = await fetch(`${API}/posts/${postId}`, {
+    const res = await fetch(`${API}/subreddits/${subredditId}`, {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -49,11 +50,11 @@ const DeletePost = () => {
     if (!info.success) {
       setError(info.error);
     } else {
-      fetchPosts();
+      fetchSubreddits();
       navigate('/');
     }
 
-    setIsDeleting(false);
+    setIsDeletingReddit(false);
   };
 
   return (
@@ -66,4 +67,4 @@ const DeletePost = () => {
     </div>
   );
 };
-export default DeletePost;
+export default DeleteRedditPost;

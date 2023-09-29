@@ -9,6 +9,8 @@ import CreatePost from './components/CreatePost.jsx';
 import Home from './components/Home.jsx';
 import EditPost from './components/EditPost.jsx';
 import DeletePost from './components/DeletePost.jsx';
+import Subreddit from './components/Subreddit.jsx';
+import DeleteRedditPost from './components/DeleteRedditPost.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,8 @@ const router = createBrowserRouter([
       { path: 'create-post', element: <CreatePost /> },
       { path: 'edit-post/:postId', element: <EditPost /> },
       { path: 'delete-post/:postId', element: <DeletePost /> },
+      { path: 'subreddit/:postId', element: <Subreddit /> },
+      { path: 'delete-subreddit/:postId', element: <DeleteRedditPost /> },
       //   { path: 'post', element: <Post /> },
       //   { path: 'posts:userId', element: <User /> },
     ],
