@@ -6,7 +6,7 @@ import Comments from './Comments';
 
 const Subreddit = () => {
   const navigate = useNavigate();
-  const { token, fetchSubreddits } = useOutletContext();
+  const { token, fetchSubreddits, fetchPosts } = useOutletContext();
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
