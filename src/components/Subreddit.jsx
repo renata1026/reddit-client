@@ -1,68 +1,42 @@
-import React, { useState } from 'react';
-import { API } from '../lib';
-import Button from './Button';
-import { useOutletContext, useNavigate } from 'react-router-dom';
-import Comments from './Comments';
+import React, { useEffect, useState } from 'react';
+import { useOutletContext, useParams } from 'react-router-dom';
+import PostCard from './PostCard';
+import DeleteRedditPost from './DeleteSubredditPost'; // Import the DeleteRedditPost component
 
 const Subreddit = () => {
-  const navigate = useNavigate();
-  const { token, fetchSubreddits, fetchPosts } = useOutletContext();
-  const [name, setName] = useState('');
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const { token, fetchPosts, posts, user } = useOutletContext(); // Assume you have user information
+  const { subredditId } = useParams();
+  console.log(posts);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  useEffect(() => {
+    setFilteredPosts(
+      posts.filter((post) => {
+        return post.subredditId === subredditId;
+      })
+    );
+  }, [posts, subredditId]);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    setError('');
-    setSuccessMessage('');
-
-    const res = await fetch(`${API}/subreddits`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-      }),
-    });
-
-    const info = await res.json();
-
-    if (!info.success) {
-      setError(info.error);
-      setSuccessMessage('');
-    } else {
-      setName(''); // Clear input field
-      fetchSubreddits();
-      setSuccessMessage('Subreddit created successfully.');
-    }
-  }
+  const canDelete = (post) => {
+    // Check if the user is the author of the post
+    return user && user.id === post.authorId; // Adjust this condition based on your user data structure
+  };
 
   return (
-    <div className="container mx-auto p-4 bg-gray-200 mt-5 ml-80">
-      <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-        style={{ width: '60%' }}
-        onSubmit={handleSubmit}
-      >
-        <div className="mb-4 mt-4">
-          <input
-            className="border rounded w-full py-2 px-3"
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            placeholder="Subreddit Name"
-          />
-        </div>
-
-        <div className="mb-6 flex justify-end">
-          <Button />
-        </div>
-        {error && <p className="text-red-500">{error}</p>}
-        {successMessage && <p className="text-green-500">{successMessage}</p>}
-      </form>
-      <Comments />
+    <div className="relative h-32">
+      {filteredPosts.map((filteredPost) => {
+        return (
+          <div key={filteredPost.id}>
+            <PostCard
+              title={filteredPost.title}
+              text={filteredPost.text}
+              name={filteredPost.subreddit.name}
+            />
+            {canDelete(filteredPost) && (
+              <DeleteRedditPost postId={filteredPost.id} />
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

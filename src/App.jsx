@@ -11,7 +11,7 @@ const App = () => {
   const [subreddits, setSubreddits] = useState([]);
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
-  console.log(posts);
+
   async function fetchUser() {
     const localToken = localStorage.getItem('token');
     if (localToken) {

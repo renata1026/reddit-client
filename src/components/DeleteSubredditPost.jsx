@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { API } from '../lib';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Subreddit from './Subreddit';
+import Subreddit from './CreateSubredditPost';
 
 const DeleteRedditPost = () => {
   const { postId } = useParams();
