@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 import PostCard from './PostCard';
-import DeleteRedditPost from './DeleteSubredditPost'; // Import the DeleteRedditPost component
+// import DeleteRedditPost from './DeleteSubredditPost'; // Import the DeleteRedditPost component
 
 const Subreddit = () => {
   const { token, fetchPosts, posts, user } = useOutletContext(); // Assume you have user information
@@ -16,10 +16,10 @@ const Subreddit = () => {
     );
   }, [posts, subredditId]);
 
-  const canDelete = (post) => {
-    // Check if the user is the author of the post
-    return user && user.id === post.authorId; // Adjust this condition based on your user data structure
-  };
+  //   const canDelete = (post) => {
+  //     // Check if the user is the author of the post
+  //     return user && user.id === post.authorId; // Adjust this condition based on your user data structure
+  //   };
 
   return (
     <div className="relative h-32">
@@ -31,9 +31,9 @@ const Subreddit = () => {
               text={filteredPost.text}
               name={filteredPost.subreddit.name}
             />
-            {canDelete(filteredPost) && (
+            {/* {canDelete(filteredPost) && (
               <DeleteRedditPost postId={filteredPost.id} />
-            )}
+            )} */}
           </div>
         );
       })}

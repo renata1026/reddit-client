@@ -3,6 +3,7 @@ import { API } from '../lib';
 import Button from './Button';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import Comments from './Comments';
+import { FaImage, FaBook, FaLink, FaPoll } from 'react-icons/fa';
 
 const Subreddit = () => {
   const navigate = useNavigate();
@@ -46,6 +47,32 @@ const Subreddit = () => {
         style={{ width: '60%' }}
         onSubmit={handleSubmit}
       >
+        <div className="flex justify-around border border-gray-300 p-4">
+          <button className="post flex items-center space-x-2">
+            <i className="text-xl">
+              <FaBook />
+            </i>
+            <span>Post</span>
+          </button>
+          <button className="Image & Video flex items-center space-x-2">
+            <i className="text-xl">
+              <FaImage />
+            </i>
+            <span>Image & Video</span>
+          </button>
+          <button className="Link flex items-center space-x-2">
+            <i className="text-xl">
+              <FaLink />
+            </i>
+            <span>Link</span>
+          </button>
+          <button className="Poll flex items-center space-x-2">
+            <i className="text-xl">
+              <FaPoll />
+            </i>
+            <span>Poll</span>
+          </button>
+        </div>
         <div className="mb-4 mt-4">
           <input
             className="border rounded w-full py-2 px-3"
@@ -62,7 +89,6 @@ const Subreddit = () => {
         {error && <p className="text-red-500">{error}</p>}
         {successMessage && <p className="text-green-500">{successMessage}</p>}
       </form>
-      <Comments />
     </div>
   );
 };

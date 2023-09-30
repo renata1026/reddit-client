@@ -11,7 +11,7 @@ import EditPost from './components/EditPost.jsx';
 import DeletePost from './components/DeletePost.jsx';
 import Subreddit from './components/Subreddit.jsx'; // Updated component name
 import CreateSubredditPost from './components/CreateSubredditPost.jsx';
-import DeleteSubredditPost from './components/DeleteSubredditPost.jsx';
+// import DeleteSubredditPost from './components/DeleteSubredditPost.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,10 +32,10 @@ const router = createBrowserRouter([
         path: 'subreddit/:subredditId/create-subreddit-post',
         element: <CreateSubredditPost />,
       },
-      {
-        path: 'subreddit/:subredditId/delete-subreddit-post/:postId',
-        element: <DeleteSubredditPost />,
-      },
+      //   {
+      //     path: 'subreddit/:subredditId/delete-subreddit-post/:postId',
+      //     element: <DeleteSubredditPost />,
+      //   },
       //   { path: 'post', element: <Post /> },
       //   { path: 'posts:userId', element: <User /> },
     ],
