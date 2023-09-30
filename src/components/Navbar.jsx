@@ -48,6 +48,11 @@ export default function Navbar({ user, setToken, setUser, subreddits }) {
     setSearchQuery(e.target.value);
   };
 
+  // / Function to toggle the Sidebar
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const handleSearchSubmit = () => {
     console.log('Search query:', searchQuery);
   };
