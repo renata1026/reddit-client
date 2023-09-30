@@ -4,7 +4,7 @@ import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 
 const Home = () => {
   const { subreddits, posts } = useOutletContext();
-
+  console.log(posts);
   return (
     <div className="container mx-auto p-4">
       <div className="flex">
