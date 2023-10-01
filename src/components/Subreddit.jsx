@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 import PostCard from './PostCard';
-// import DeleteRedditPost from './DeleteSubredditPost'; // Import the DeleteRedditPost component
+import { FaTrashAlt } from 'react-icons/fa';
 
-const Subreddit = () => {
+const Subreddit = ({ deleteSubredditPost }) => {
   const { token, fetchPosts, posts, user } = useOutletContext(); // Assume you have user information
   const { subredditId } = useParams();
   console.log(posts);
@@ -16,10 +16,9 @@ const Subreddit = () => {
     );
   }, [posts, subredditId]);
 
-  //   const canDelete = (post) => {
-  //     // Check if the user is the author of the post
-  //     return user && user.id === post.authorId; // Adjust this condition based on your user data structure
-  //   };
+  const handleDeletePost = (postId) => {
+    deleteSubredditPost(postId);
+  };
 
   return (
     <div className="relative h-32">
@@ -31,9 +30,8 @@ const Subreddit = () => {
               text={filteredPost.text}
               name={filteredPost.subreddit.name}
             />
-            {/* {canDelete(filteredPost) && (
-              <DeleteRedditPost postId={filteredPost.id} />
-            )} */}
+
+            <FaTrashAlt onClick={() => handleDeletePost(filteredPost.id)} />
           </div>
         );
       })}

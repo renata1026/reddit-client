@@ -1,14 +1,27 @@
-import React from 'react';
-import { useOutletContext, Link } from 'react-router-dom';
-import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+// Home.js
+import React, { useEffect } from 'react';
+import { useOutletContext, Link, useNavigate } from 'react-router-dom';
+import { FaComment, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import { API } from '../lib';
+import Vote from './Vote'; // Import the Vote component
 
 const Home = () => {
-  const { subreddits, posts } = useOutletContext();
-  console.log(posts);
+  const navigate = useNavigate();
+  const { posts, token, fetchPosts } = useOutletContext();
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const handleVote = (postId, voteValue) => {
+    // Handle the vote action here, e.g., update the vote count in the Home component's state
+    // You can implement the logic to update the vote count as needed
+    console.log(`Vote received for post ${postId} with value ${voteValue}`);
+  };
+
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex">
-        <div className="w-1/4 p-4"></div>
+    <div className="container mx-auto p-4 overflow-hidden">
+      <div className="flex justify-center">
         <div className="w-3/4">
           <div className="posts-container">
             {posts.map((post) => {
@@ -22,7 +35,7 @@ const Home = () => {
                       <div className="flex items-center space-x-3">
                         <div className="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
                         <div className="text-lg font-bold text-slate-700">
-                          Posted by u/ {post.user.username}
+                          Posted by u/{post.user.username}
                         </div>
                       </div>
                       <div className="flex items-center space-x-8">
@@ -42,59 +55,32 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <div>
-                      <div className="flex items-center justify-between text-slate-500">
-                        <div className="flex space-x-4 md:space-x-8">
-                          <div className="flex cursor-pointer items-center transition hover:text-slate-600">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="mr-1.5 h-5 w-5"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                              />
-                            </svg>
-                            <span>125</span>
-                          </div>
-                          <div className="flex cursor-pointer items-center transition hover:text-slate-600">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="mr-1.5 h-5 w-5"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
-                              />
-                            </svg>
-                            <span>4</span>
-                          </div>
+                    <div className="flex items-center justify-between text-slate-500">
+                      <div className="flex space-x-4 md:space-x-8">
+                        <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                          <FaComment className="mr-4 w-5 h-5" />
+                          <span>125</span>
+                        </div>
+                        <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                          {/* Render the Vote component */}
+                          <Vote postId={post.id} onVote={handleVote} />
                         </div>
                       </div>
-                    </div>
-                    <div className="flex items-center">
-                      <Link
-                        to={`/edit-post/${post.id}`}
-                        className="border-none outline-none bg-none"
-                      >
-                        <FaPencilAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
-                      </Link>
-                      <Link
-                        to={`/delete-post/${post.id}`}
-                        className="border-none outline-none bg-none"
-                      >
-                        <FaTrashAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
-                      </Link>
+
+                      <div className="flex space-x-4 md:space-x-8">
+                        <Link
+                          to={`/edit-post/${post.id}`}
+                          className="border-none outline-none bg-none"
+                        >
+                          <FaPencilAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
+                        </Link>
+                        <Link
+                          to={`/delete-post/${post.id}`}
+                          className="border-none outline-none bg-none"
+                        >
+                          <FaTrashAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

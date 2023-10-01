@@ -61,6 +61,7 @@ const PostCard = ({ title, text }) => {
                         />
                       </svg>
                       <span>4</span>
+                      <FaTrashAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
                     </div>
                   </div>
                 </div>
