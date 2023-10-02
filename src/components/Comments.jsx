@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DiscussionSection = () => {
+const Comments = ({postId}) => {
   return (
     <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
       <div className="max-w-2xl mx-auto px-4">
@@ -22,12 +22,7 @@ const DiscussionSection = () => {
               required
             ></textarea>
           </div>
-          <button
-            type="submit"
-            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
-          >
-            Post comment
-          </button>
+          <button type="button">Post comment</button>
         </form>
         <article className="p-6 text-base bg-white rounded-lg dark:bg-gray-900">
           <footer className="flex justify-between items-center mb-2">
@@ -134,4 +129,4 @@ const DiscussionSection = () => {
   );
 };
 
-export default DiscussionSection;
+export default Comments;

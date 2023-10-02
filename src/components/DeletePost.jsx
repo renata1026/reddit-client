@@ -53,24 +53,24 @@ const DeletePost = () => {
     console.log(isMounted.current);
     debugger;
     //if (isMounted.current) {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'You will not be able to recover this post!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#e53e3e',
-        cancelButtonColor: '#63b3ed',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'Cancel',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          handleDeletePost();
-        } else {
-          setError('Post deletion cancelled.');
-          // Add a back button to the home page
-          navigate('/');
-        }
-      });
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this post!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e53e3e',
+      cancelButtonColor: '#63b3ed',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeletePost();
+      } else {
+        setError('Post deletion cancelled.');
+        // Add a back button to the home page
+        navigate('/');
+      }
+    });
     /*} else {
       isMounted.current = true;
     }*/

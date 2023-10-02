@@ -1,13 +1,19 @@
 // Home.js
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { FaComment, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import { API } from '../lib';
+import Comments from './Comments';
 import Vote from './Vote'; // Import the Vote component
 
 const Home = () => {
   const navigate = useNavigate();
   const { posts, token, fetchPosts } = useOutletContext();
+  const [isCommentExpanded, setIsCommentExpanded] = useState(false);
+  const toggleCommentSection = () => {
+    console.log(isCommentExpanded);
+    setIsCommentExpanded(!isCommentExpanded);
+  };
 
   useEffect(() => {
     fetchPosts();
@@ -58,8 +64,15 @@ const Home = () => {
                     <div className="flex items-center justify-between text-slate-500">
                       <div className="flex space-x-4 md:space-x-8">
                         <div className="flex cursor-pointer items-center transition hover:text-slate-600">
-                          <FaComment className="mr-4 w-5 h-5" />
-                          <span>125</span>
+                          <button
+                            className="flex cursor-pointer items-center transition hover:text-slate-600"
+                            onClick={() => {
+                              toggleCommentSection();
+                            }}
+                          >
+                            <FaComment className="mr-4 w-5 h-5" />
+                            <span>Comment</span>
+                          </button>
                         </div>
                         <div className="flex cursor-pointer items-center transition hover:text-slate-600">
                           {/* Render the Vote component */}
@@ -81,6 +94,15 @@ const Home = () => {
                           <FaTrashAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
                         </Link>
                       </div>
+                    </div>
+                    <div className="">
+                      {isCommentExpanded ? (
+                        <div>
+                          <Comments postId={post.postId} />
+                        </div>
+                      ) : (
+                        ''
+                      )}
                     </div>
                   </div>
                 </div>

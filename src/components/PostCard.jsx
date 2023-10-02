@@ -1,6 +1,7 @@
 import React from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
+import { useState } from 'react';
 
 const PostCard = ({ title, text }) => {
   return (
@@ -43,7 +44,7 @@ const PostCard = ({ title, text }) => {
                           d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                         />
                       </svg>
-                      <span>125</span>
+                      <span>1255</span>
                     </div>
                     <div className="flex cursor-pointer items-center transition hover:text-slate-600">
                       <svg
