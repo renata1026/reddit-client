@@ -106,7 +106,7 @@ export default function Navbar({ user, setToken, setUser, subreddits }) {
               onClick={
                 isSubredditPostPage ? handleCreateSubreddit : handleCreatePost
               }
-              className="hidden md:flex items-center space-x-8"
+              className="flex items-center space-x-8" // Updated to make it flex on mobile
             >
               <FaPlus className="text-xl" />
               <span>
@@ -116,28 +116,28 @@ export default function Navbar({ user, setToken, setUser, subreddits }) {
             <ul className="flex items-center space-x-8">
               {!user?.id ? (
                 <>
-                  {screenWidth > 1000 && (
-                    <>
-                      <li className="md:hidden">
-                        <Link
-                          to="/login"
-                          aria-label="Login"
-                          title="Login"
-                          className="font-medium tracking-wide text-gray-300 hover:text-red-500 rounded-full p-2"
-                        >
-                          Login
-                        </Link>
-                      </li>
-                      <li className="md:hidden">
-                        <Link
-                          to="/register"
-                          className="font-medium tracking-wide text-gray-300 hover:text-red-500 rounded-full p-2"
-                        >
-                          Register
-                        </Link>
-                      </li>
-                    </>
-                  )}
+                  <li>
+                    {' '}
+                    {/* Removed conditional rendering */}
+                    <Link
+                      to="/login"
+                      aria-label="Login"
+                      title="Login"
+                      className="font-medium tracking-wide text-gray-300 hover:text-red-500 rounded-full p-2"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    {' '}
+                    {/* Removed conditional rendering */}
+                    <Link
+                      to="/register"
+                      className="font-medium tracking-wide text-gray-300 hover:text-red-500 rounded-full p-2"
+                    >
+                      Register
+                    </Link>
+                  </li>
                 </>
               ) : (
                 <>
