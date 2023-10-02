@@ -90,10 +90,7 @@ export default function Navbar({ user, setToken, setUser, subreddits }) {
                     onChange={handleSearchInputChange}
                   />
                   <div className="absolute left-5 top-1/2 transform -translate-y-1/2">
-                    <FaSearch
-                      onClick={handleSearchSubmit}
-                      className="text-gray-500 cursor-pointer"
-                    />
+                    <FaSearch className="text-gray-500 cursor-pointer" />
                   </div>
                 </>
               )}
