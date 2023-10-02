@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import { API } from './lib/index';
 // import Post from './components/Post';
@@ -11,6 +11,7 @@ const App = () => {
   const [subreddits, setSubreddits] = useState([]);
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
+  const [children, setChildren] = useState([]);
 
   async function fetchUser() {
     const localToken = localStorage.getItem('token');
@@ -52,6 +53,28 @@ const App = () => {
     fetchSubreddits();
   }, [token]);
 
+  console.log(posts);
+
+  const { postId } = useParams();
+  console.log(postId);
+
+  const findPost = posts.find((_post) => _post.id === postId);
+  console.log(findPost);
+  //   const post = posts.find((_post) => _post.id === postId);
+  //   console.log(post);
+  //   async function fetchChildren(postId) {
+  //     const res = await fetch(`GET /posts/${postId}`);
+  //     const info = await res.json();
+  //     if (info.success) {
+  //       setChildren(info.children);
+  //     }
+  //   }
+  //   useEffect(() => {
+  //     fetchChildren(post)
+  //       .then((data) => setChildren(data))
+  //       .catch((error) => console.error('Error:', error));
+  //   }, []);
+
   return (
     <div>
       <Navbar
@@ -71,6 +94,8 @@ const App = () => {
           setUser,
           subreddits,
           fetchSubreddits,
+          //   fetchChildren,
+          children,
         }}
       />
       {/* <Post /> */}

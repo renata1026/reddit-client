@@ -6,10 +6,11 @@ const EditPost = () => {
   const { token, fetchPosts, posts } = useOutletContext();
   const { postId } = useParams();
 
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const post = posts.find((_post) => _post.id === postId);
+
+  const [title, setTitle] = useState(post.title);
+  const [text, setText] = useState(post.text);
   const [error, setError] = useState('');
-  
 
   const navigate = useNavigate();
 
