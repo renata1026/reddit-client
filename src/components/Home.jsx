@@ -1,4 +1,3 @@
-// Home.js
 import React, { useState, useEffect } from 'react';
 import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { FaComment, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
@@ -20,23 +19,21 @@ const Home = () => {
   }, []);
 
   const handleVote = (postId, voteValue) => {
-    // Handle the vote action here, e.g., update the vote count in the Home component's state
-    // You can implement the logic to update the vote count as needed
     console.log(`Vote received for post ${postId} with value ${voteValue}`);
   };
 
   return (
     <div className="container mx-auto p-4 overflow-hidden">
       <div className="flex justify-center">
-        <div className="w-3/4">
+        <div className="md:w-1/2">
           <div className="posts-container">
             {posts.map((post) => {
               return (
                 <div
-                  className="flex items-center justify-center min-h-[22vh]"
+                  className="mb-4" // Add margin-bottom for gap between cards
                   key={post.id}
                 >
-                  <div className="rounded-xl border p-5 shadow-md w-9/12 bg-white">
+                  <div className="rounded-xl border p-5 shadow-md bg-white">
                     <div className="flex w-full items-center justify-between border-b pb-3">
                       <div className="flex items-center space-x-3">
                         <div className="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
@@ -70,7 +67,8 @@ const Home = () => {
                               toggleCommentSection();
                             }}
                           >
-                            <FaComment className="mr-4 w-5 h-5" />
+                            <FaComment className="w-4 h-4 md:w-5 md:h-5 mr-2" />{' '}
+                            {/* Adjusted icon size */}
                             <span>Comment</span>
                           </button>
                         </div>
@@ -85,13 +83,15 @@ const Home = () => {
                           to={`/edit-post/${post.id}`}
                           className="border-none outline-none bg-none"
                         >
-                          <FaPencilAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
+                          <FaPencilAlt className="w-4 h-4 md:w-5 md:h-5 cursor-pointer hover:text-slate-600" />{' '}
+                          {/* Adjusted icon size */}
                         </Link>
                         <Link
                           to={`/delete-post/${post.id}`}
                           className="border-none outline-none bg-none"
                         >
-                          <FaTrashAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
+                          <FaTrashAlt className="w-4 h-4 md:w-5 md:h-5 cursor-pointer hover:text-slate-600" />{' '}
+                          {/* Adjusted icon size */}
                         </Link>
                       </div>
                     </div>
@@ -99,6 +99,7 @@ const Home = () => {
                       {isCommentExpanded ? (
                         <div>
                           <Comments postId={post.postId} />
+                          <PostCard postId={post.postId} />
                         </div>
                       ) : (
                         ''

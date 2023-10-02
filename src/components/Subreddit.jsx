@@ -30,8 +30,6 @@ const Subreddit = ({ deleteSubredditPost }) => {
               text={filteredPost.text}
               name={filteredPost.subreddit.name}
             />
-
-            <FaTrashAlt onClick={() => handleDeletePost(filteredPost.id)} />
           </div>
         );
       })}

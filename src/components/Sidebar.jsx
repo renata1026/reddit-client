@@ -21,14 +21,16 @@ const Sidebar = ({ subreddits }) => {
 
   return (
     <div
-      className="fixed inset-y-0 left-0 w-64 bg-white text-rgb-15-26-28 opacity-70 border-r border-gray-300 mt-16 transition-transform ease-in-out duration-300 transform font-reddit-sans"
+      className={`fixed inset-y-0 left-0 bg-white text-rgb-15-26-28 border-r border-gray-300 mt-16 transition-transform ease-in-out duration-300 transform font-reddit-sans ${'md:w-64 md:opacity-70 '} ${'md-64 opacity-100'}`}
       style={{ zIndex: 9 }}
     >
       <nav>
         <ul className="space-y-2 mt-10">
           <li className="px-4 py-2 flex items-center text-base">
-            <FaHome className="mr-2" />
-            Home
+            <Link to={'/'}>
+              <FaHome className="mr-2" />
+              Home
+            </Link>
           </li>
           <li className="px-4 py-2 flex items-center border-b border-gray-500 text-base">
             <FaFire className="mr-2" />

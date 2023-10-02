@@ -1,9 +1,8 @@
 import React from 'react';
-import { useOutletContext, Link } from 'react-router-dom';
 import { FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const PostCard = ({ title, text }) => {
+const PostCard = ({ title, text, handleDeleteRedditPost, postId }) => {
   return (
     <div className="container mx-auto p-4">
       <div className="flex">
@@ -62,8 +61,15 @@ const PostCard = ({ title, text }) => {
                         />
                       </svg>
                       <span>4</span>
-                      <FaTrashAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
                     </div>
+                    <Link to={`/delete-post/${postId}`}>
+                      <button
+                        className="flex cursor-pointer items-center transition hover:text-slate-600"
+                        onClick={handleDeleteRedditPost}
+                      >
+                        <FaTrashAlt className="w-5 h-5 cursor-pointer hover:text-slate-600" />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
