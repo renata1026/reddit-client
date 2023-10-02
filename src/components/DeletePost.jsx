@@ -50,7 +50,8 @@ const DeletePost = () => {
 
       setIsDeleting(false);
     };
-
+    console.log(isMounted.current);
+    debugger;
     if (isMounted.current) {
       Swal.fire({
         title: 'Are you sure?',
