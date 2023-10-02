@@ -20,47 +20,41 @@ const Vote = ({ postId }) => {
   };
 
   const handleVote = async (voteType) => {
-    try {
-      const postToUpdate = posts.find((p) => p.id === postId);
+    const postToUpdate = posts.find((p) => p.id === postId);
 
-      if (!postToUpdate) {
-        console.error('Post not found');
-        return;
-      }
+    if (!postToUpdate) {
+      return;
+    }
 
-      const isUpvote = voteType === 'upvote';
-      const isDownvote = voteType === 'downvote';
+    const isUpvote = voteType === 'upvote';
+    const isDownvote = voteType === 'downvote';
 
-      if (isUpvote || isDownvote) {
-        const response = await fetch(
-          `${API}/votes/${isUpvote ? 'upvotes' : 'downvotes'}/${postId}`,
-          {
-            method: isUpvote ? 'POST' : 'DELETE',
-            headers: {
-              'Content-type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              postId: postToUpdate.id,
-            }),
-          }
-        );
-
-        const data = await response.json();
-        console.log(data);
-
-        if (isUpvote) {
-          if (!postToUpdate.upvotes) postToUpdate.upvotes = [];
-          postToUpdate.upvotes.push({ userId: user.id });
-        } else if (isDownvote) {
-          if (!postToUpdate.downvotes) postToUpdate.downvotes = [];
-          postToUpdate.downvotes.push({ userId: user.id });
+    if (isUpvote || isDownvote) {
+      const response = await fetch(
+        `${API}/votes/${isUpvote ? 'upvotes' : 'downvotes'}/${postId}`,
+        {
+          method: isUpvote ? 'POST' : 'DELETE',
+          headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            postId: postToUpdate.id,
+          }),
         }
+      );
 
-        calculateVoteCount();
+      const data = await response.json();
+
+      if (isUpvote) {
+        if (!postToUpdate.upvotes) postToUpdate.upvotes = [];
+        postToUpdate.upvotes.push({ userId: user.id });
+      } else if (isDownvote) {
+        if (!postToUpdate.downvotes) postToUpdate.downvotes = [];
+        postToUpdate.downvotes.push({ userId: user.id });
       }
-    } catch (error) {
-      console.error(`Error handling ${voteType}:`, error);
+
+      calculateVoteCount();
     }
   };
 

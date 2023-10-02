@@ -53,27 +53,9 @@ const App = () => {
     fetchSubreddits();
   }, [token]);
 
-  console.log(posts);
-
   const { postId } = useParams();
-  console.log(postId);
 
   const findPost = posts.find((_post) => _post.id === postId);
-  console.log(findPost);
-  //   const post = posts.find((_post) => _post.id === postId);
-  //   console.log(post);
-  //   async function fetchChildren(postId) {
-  //     const res = await fetch(`GET /posts/${postId}`);
-  //     const info = await res.json();
-  //     if (info.success) {
-  //       setChildren(info.children);
-  //     }
-  //   }
-  //   useEffect(() => {
-  //     fetchChildren(post)
-  //       .then((data) => setChildren(data))
-  //       .catch((error) => console.error('Error:', error));
-  //   }, []);
 
   return (
     <div>

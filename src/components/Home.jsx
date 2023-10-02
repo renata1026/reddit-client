@@ -3,14 +3,14 @@ import { useOutletContext, Link, useNavigate } from 'react-router-dom';
 import { FaComment, FaPencilAlt, FaTrashAlt } from 'react-icons/fa';
 import { API } from '../lib';
 import Comments from './Comments';
-import Vote from './Vote'; // Import the Vote component
+import Vote from './Vote';
+import PostCard from './PostCard';
 
 const Home = () => {
   const navigate = useNavigate();
   const { posts, token, fetchPosts } = useOutletContext();
   const [isCommentExpanded, setIsCommentExpanded] = useState(false);
   const toggleCommentSection = () => {
-    console.log(isCommentExpanded);
     setIsCommentExpanded(!isCommentExpanded);
   };
 

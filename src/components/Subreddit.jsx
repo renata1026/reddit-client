@@ -4,9 +4,9 @@ import PostCard from './PostCard';
 import { FaTrashAlt } from 'react-icons/fa';
 
 const Subreddit = ({ deleteSubredditPost }) => {
-  const { token, fetchPosts, posts, user } = useOutletContext(); // Assume you have user information
+  const { token, fetchPosts, posts, user } = useOutletContext();
   const { subredditId } = useParams();
-  console.log(posts);
+
   const [filteredPosts, setFilteredPosts] = useState([]);
   useEffect(() => {
     setFilteredPosts(

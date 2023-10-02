@@ -53,10 +53,6 @@ export default function Navbar({ user, setToken, setUser, subreddits }) {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const handleSearchSubmit = () => {
-    console.log('Search query:', searchQuery);
-  };
-
   return (
     <div>
       <div className="nav-menu bg-white shadow-md relative z-10">
@@ -118,7 +114,6 @@ export default function Navbar({ user, setToken, setUser, subreddits }) {
                 <>
                   <li>
                     {' '}
-                    {/* Removed conditional rendering */}
                     <Link
                       to="/login"
                       aria-label="Login"
@@ -130,7 +125,6 @@ export default function Navbar({ user, setToken, setUser, subreddits }) {
                   </li>
                   <li>
                     {' '}
-                    {/* Removed conditional rendering */}
                     <Link
                       to="/register"
                       className="font-medium tracking-wide text-gray-300 hover:text-red-500 rounded-full p-2"

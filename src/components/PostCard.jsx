@@ -6,10 +6,9 @@ const PostCard = ({ title, text, handleDeleteRedditPost, postId }) => {
   return (
     <div className="container mx-auto p-4">
       <div className="flex">
-        <div className="w-1/4 p-4"></div>
-        <div className="w-3/4">
+        <div className="w-full md:w-1/2 md:ml-40 p-4">
           <div className="posts-container">
-            <div className="rounded-xl border p-5 shadow-md w-9/12 bg-white">
+            <div className="rounded-xl border p-5 shadow-md w-full md:ml-20  bg-white">
               <div className="flex w-full items-center justify-between border-b pb-3">
                 <div className="flex items-center space-x-3">
                   <div className="h-8 w-8 rounded-full bg-slate-400 bg-[url('https://i.pravatar.cc/32')]"></div>
@@ -29,7 +28,7 @@ const PostCard = ({ title, text, handleDeleteRedditPost, postId }) => {
                 <div className="flex items-center justify-between text-slate-500">
                   <div className="flex space-x-4 md:space-x-8">
                     <div className="flex cursor-pointer items-center transition hover:text-slate-600">
-                      <svg
+                      {/* <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="mr-1.5 h-5 w-5"
                         fill="none"
@@ -43,9 +42,9 @@ const PostCard = ({ title, text, handleDeleteRedditPost, postId }) => {
                           d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                         />
                       </svg>
-                      <span>1255</span>
+                      <span>1255</span> */}
                     </div>
-                    <div className="flex cursor-pointer items-center transition hover:text-slate-600">
+                    {/* <div className="flex cursor-pointer items-center transition hover:text-slate-600">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="mr-1.5 h-5 w-5"
@@ -61,7 +60,7 @@ const PostCard = ({ title, text, handleDeleteRedditPost, postId }) => {
                         />
                       </svg>
                       <span>4</span>
-                    </div>
+                    </div> */}
                     <Link to={`/delete-post/${postId}`}>
                       <button
                         className="flex cursor-pointer items-center transition hover:text-slate-600"
