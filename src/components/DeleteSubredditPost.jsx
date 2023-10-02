@@ -13,18 +13,16 @@ const DeleteRedditPost = () => {
   const [error, setError] = useState('');
   const isMounted = useRef(false);
 
+  const canDeleteReddit = (post) => {
+    // Check if the user is the author of the post
+    return redditId === post.redditId;
+  };
   useEffect(() => {
     const handleDeleteRedditPost = async () => {
       setIsDeletingReddit(true);
       setError('');
 
       try {
-        if (subredditId !== user.subredditId) {
-          setError('You are not authorized to delete this subreddit.');
-          setIsDeletingReddit(false);
-          return;
-        }
-
         const res = await fetch(`${API}/subreddits/${subredditId}`, {
           method: 'DELETE',
           headers: {
@@ -53,46 +51,45 @@ const DeleteRedditPost = () => {
     };
 
     // Trigger SweetAlert when the component mounts
-    if (isMounted.current) {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'You will not be able to recover this subreddit!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#e53e3e',
-        cancelButtonColor: '#63b3ed',
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'Cancel',
-      }).then((result) => {
-        if (result.isConfirmed) {
-          handleDeleteRedditPost();
-        } else {
-          setError('Subreddit deletion cancelled.');
-          // Add a back button to the home page
-          navigate('/');
-        }
-      });
-    } else {
-      isMounted.current = true;
-    }
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this subreddit!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e53e3e',
+      cancelButtonColor: '#63b3ed',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDeleteRedditPost();
+      } else {
+        setError('Subreddit deletion cancelled.');
+        // Add a back button to the home page
+        navigate('/');
+      }
+    });
   }, [subredditId, token, fetchSubreddits, navigate, user]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-2xl font-semibold mb-4">Delete Subreddit</h1>
-      {isDeletingReddit && <p className="text-gray-600 mb-4">Deleting...</p>}
+      <h1 className="text-2xl font-semibold mb-4">Delete Post</h1>
+      {isDeleting && <p className="text-gray-600 mb-4">Deleting...</p>}
       {error && (
         <div>
-          <p className="text-red-500 mt-4">{error}</p>
-          <button
-            onClick={() => {
-              navigate('/');
-            }}
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Back to Home
-          </button>
-          <Subreddit deleteSubredditPost={deleteSubredditPost} />
+          <div className="text-center">
+            <p className="text-red-500 mt-4">{error}</p>
+
+            <button
+              onClick={() => {
+                navigate('/');
+              }}
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-center"
+            >
+              Back to Home
+            </button>
+          </div>
         </div>
       )}
     </div>

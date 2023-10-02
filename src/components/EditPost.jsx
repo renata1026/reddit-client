@@ -47,12 +47,9 @@ const EditPost = () => {
   }
 
   return (
-    <div
-      className="container mx-auto p-4 bg-gray-200 mt-5"
-      style={{ marginLeft: '20em' }}
-    >
+    <div className="container mx-auto p-4  mt-5" style={{ marginLeft: '20em' }}>
       <form
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-gray-100 shadow-md rounded px-8 pt-6 pb-8 mb-4"
         style={{ width: '60%' }}
         onSubmit={handleEditPost}
       >
@@ -77,7 +74,7 @@ const EditPost = () => {
         </div>
         <div>
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
             type="submit"
           >
             Edit

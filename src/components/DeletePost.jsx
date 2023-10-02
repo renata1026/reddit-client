@@ -50,9 +50,7 @@ const DeletePost = () => {
 
       setIsDeleting(false);
     };
-    console.log(isMounted.current);
-    debugger;
-    //if (isMounted.current) {
+
     Swal.fire({
       title: 'Are you sure?',
       text: 'You will not be able to recover this post!',
@@ -82,15 +80,18 @@ const DeletePost = () => {
       {isDeleting && <p className="text-gray-600 mb-4">Deleting...</p>}
       {error && (
         <div>
-          <p className="text-red-500 mt-4">{error}</p>
-          <button
-            onClick={() => {
-              navigate('/');
-            }}
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Back to Home
-          </button>
+          <div className="text-center">
+            <p className="text-red-500 mt-4">{error}</p>
+
+            <button
+              onClick={() => {
+                navigate('/');
+              }}
+              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-center"
+            >
+              Back to Home
+            </button>
+          </div>
         </div>
       )}
     </div>
