@@ -52,7 +52,7 @@ const DeletePost = () => {
     };
     console.log(isMounted.current);
     debugger;
-    if (isMounted.current) {
+    //if (isMounted.current) {
       Swal.fire({
         title: 'Are you sure?',
         text: 'You will not be able to recover this post!',
@@ -71,9 +71,9 @@ const DeletePost = () => {
           navigate('/');
         }
       });
-    } else {
+    /*} else {
       isMounted.current = true;
-    }
+    }*/
   }, [postId, token, userId, fetchPosts, navigate]);
 
   return (
